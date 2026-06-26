@@ -1,6 +1,7 @@
 import Image from "next/image";
-import { MapPin, MessageCircle, User, Navigation } from "lucide-react";
+import { MapPin, MessageCircle, User, Navigation, Store } from "lucide-react";
 import { UMKM } from "@/lib/googleSheets";
+import { getDirectDriveUrl } from "@/utils/driveImage";
 
 const kategoriColor: Record<string, string> = {
   Makanan: "bg-orange-100 text-orange-700",
@@ -13,20 +14,34 @@ const kategoriColor: Record<string, string> = {
 };
 
 export default function UMKMCard({ umkm }: { umkm: UMKM }) {
-  const badgeClass = kategoriColor[umkm.kategori || "Umum"] || kategoriColor["Umum"];
+  const badgeClass =
+    kategoriColor[umkm.kategori || "Umum"] || kategoriColor["Umum"];
+
+  const fotoUrl = getDirectDriveUrl(umkm.foto);
 
   return (
     <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow duration-200 flex flex-col">
       {/* Photo */}
       <div className="relative h-48 bg-gray-100">
-        <Image
-          src={umkm.foto || "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=400&h=300&fit=crop"}
-          alt={umkm.nama_umkm}
-          fill
-          className="object-cover"
-          unoptimized
-        />
-        {/* RT Badge - top right */}
+        {fotoUrl ? (
+          <Image
+            src={fotoUrl}
+            alt={umkm.nama_umkm}
+            fill
+            className="object-cover"
+            unoptimized
+          />
+        ) : (
+          <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200 gap-2">
+            <div className="w-14 h-14 rounded-full bg-gray-300 flex items-center justify-center">
+              <Store size={28} className="text-gray-500" />
+            </div>
+            <p className="text-gray-500 text-xs font-medium text-center px-4 line-clamp-2">
+              {umkm.nama_umkm}
+            </p>
+          </div>
+        )}
+        {/* RT Badge */}
         <span className="absolute top-3 right-3 bg-primary-900 text-white text-xs font-semibold px-2.5 py-1 rounded-full">
           {umkm.rt}
         </span>
@@ -34,7 +49,9 @@ export default function UMKMCard({ umkm }: { umkm: UMKM }) {
 
       {/* Content */}
       <div className="p-4 flex flex-col flex-1">
-        <h3 className="font-bold text-gray-900 text-base mb-1">{umkm.nama_umkm}</h3>
+        <h3 className="font-bold text-gray-900 text-base mb-1">
+          {umkm.nama_umkm}
+        </h3>
 
         <div className="flex items-center gap-1.5 text-gray-500 text-xs mb-1">
           <User size={12} />
@@ -46,17 +63,21 @@ export default function UMKMCard({ umkm }: { umkm: UMKM }) {
           <span>{umkm.alamat}</span>
         </div>
 
-        <p className="text-gray-600 text-sm mb-4 flex-1 line-clamp-3">{umkm.deskripsi}</p>
+        <p className="text-gray-600 text-sm mb-4 flex-1 line-clamp-3">
+          {umkm.deskripsi}
+        </p>
 
         {umkm.kategori && (
-          <span className={`self-start text-xs font-medium px-2.5 py-1 rounded-full mb-3 ${badgeClass}`}>
+          <span
+            className={`self-start text-xs font-medium px-2.5 py-1 rounded-full mb-3 ${badgeClass}`}
+          >
             {umkm.kategori}
           </span>
         )}
 
         {/* Action Buttons */}
         <div className="flex gap-2 mt-auto">
-          <a
+          
             href={`https://wa.me/${umkm.whatsapp}`}
             target="_blank"
             rel="noopener noreferrer"
@@ -65,7 +86,7 @@ export default function UMKMCard({ umkm }: { umkm: UMKM }) {
             <MessageCircle size={15} />
             WhatsApp
           </a>
-          <a
+          
             href={umkm.maps}
             target="_blank"
             rel="noopener noreferrer"
