@@ -1,0 +1,35 @@
+{
+  "jumlahRT": 7,
+  "jumlahKK": 312,
+  "jumlahPenduduk": 1084,
+  "lakiLaki": 542,
+  "perempuan": 542,
+  "lansia": 124,
+  "balita": 87,
+  "pendatang": 156,
+  "kecamatan": "Jambangan",
+  "kelurahan": "Karah",
+  "kota": "Surabaya",
+  "ketua": "H. Sutrisno",
+  "sekretaris": "Budi Santoso",
+  "bendahara": "Siti Rahayu",
+  "visi": "Mewujudkan RW 6 Karah yang maju, guyub, dan sejahtera",
+  "misi": [
+    "Meningkatkan kerukunan dan keharmonisan warga",
+    "Mengembangkan potensi ekonomi lokal melalui UMKM",
+    "Menjaga kebersihan dan keindahan lingkungan",
+    "Meningkatkan kualitas pendidikan dan kesehatan warga"
+  ],
+  "sejarah": "RW 6 Karah merupakan bagian dari Kelurahan Karah, Kecamatan Jambangan, Kota Surabaya. Wilayah kami terdiri dari 7 RT dengan masyarakat yang rukun, guyub, dan aktif dalam kegiatan sosial kemasyarakatan.",
+  "kontak": {
+    "telepon": "(031) 1234 5678",
+    "email": "rw6karah@gmail.com",
+    "alamat": "RW 6 Karah, Kel. Karah, Kec. Jambangan, Kota Surabaya, Jawa Timur"
+  },
+  "jamPelayanan": "Senin – Jumat, 08.00 – 16.00 WIB",
+  "sosmed": {
+    "facebook": "https://facebook.com/rw6karah",
+    "instagram": "https://instagram.com/rw6karah",
+    "whatsapp": "https://wa.me/6281234567890"
+  }
+}
