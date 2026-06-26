@@ -59,3 +59,10 @@ export async function getUMKMData(): Promise<UMKM[]> {
     return dummyData.default as UMKM[];
   }
 }
+} catch (error) {
+  console.error("Failed to fetch from Google Sheets, using dummy data:", error);
+  console.error("Sheet ID:", sheetId);
+  console.error("URL tried:", `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${encodeURIComponent("Form Responses 1")}!A2:K200?key=${apiKey}`);
+  const dummyData = await import("@/data/umkm-dummy.json");
+  return dummyData.default as UMKM[];
+}
