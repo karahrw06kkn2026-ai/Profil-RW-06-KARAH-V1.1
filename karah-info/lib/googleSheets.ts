@@ -22,11 +22,12 @@ export async function getUMKMData(): Promise<UMKM[]> {
   }
 
   try {
-    const range = "Sheet1!A2:J200";
+    const sheetName = encodeURIComponent("Form Responses 1");
+    const range = `${sheetName}!A2:K200`;
     const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${apiKey}`;
 
     const response = await fetch(url, {
-      next: { revalidate: 3600 }, // ISR: revalidate every 1 hour
+      next: { revalidate: 3600 },
     });
 
     if (!response.ok) {
@@ -39,17 +40,19 @@ export async function getUMKMData(): Promise<UMKM[]> {
     return rows
       .filter((row) => row.length >= 8)
       .map((row, index) => ({
-        id: row[0] || String(index + 1),
-        nama_umkm: row[1] || "",
-        pemilik: row[2] || "",
-        rt: row[3] || "",
-        alamat: row[4] || "",
-        deskripsi: row[5] || "",
-        whatsapp: row[6] || "",
-        maps: row[7] || "",
-        foto: row[8] || "",
-        kategori: row[9] || "Umum",
+        id: row[0] || String(index + 1),        // A = id
+        // row[1] = Timestamp (skip)
+        nama_umkm: row[2] || "",                // C = nama_usaha
+        rt: row[3] || "",                       // D = rt
+        pemilik: row[4] || "",                  // E = pemilik
+        whatsapp: row[5] || "",                 // F = nomor_whatsapp
+        alamat: row[6] || "",                   // G = alamat
+        deskripsi: row[7] || "",                // H = deskripsi
+        maps: row[8] || "",                     // I = maps_url
+        foto: row[9] || "",                     // J = foto UMKM
+        kategori: row[10] || "Umum",            // K = kategori
       }));
+
   } catch (error) {
     console.error("Failed to fetch from Google Sheets, using dummy data:", error);
     const dummyData = await import("@/data/umkm-dummy.json");
