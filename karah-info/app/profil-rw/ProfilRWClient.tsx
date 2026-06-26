@@ -25,7 +25,7 @@ export default function ProfilRWClient() {
   ];
 
   const statsCards = [
-    { icon: Home, label: "Jumlah KK", value: profilRW.jumlahKK, color: "bg-primary-900", unit: "KK" },
+    { icon: Home, label: "Jumlah Rumah", value: profilRW.jumlahRumah, color: "bg-primary-900", unit: "Rumah" },
     { icon: Users, label: "Jumlah Penduduk", value: profilRW.jumlahPenduduk, color: "bg-blue-500", unit: "Jiwa" },
     { icon: UserCheck, label: "Laki-laki", value: profilRW.lakiLaki, color: "bg-indigo-500", unit: "Jiwa" },
     { icon: UserCheck, label: "Perempuan", value: profilRW.perempuan, color: "bg-pink-500", unit: "Jiwa" },
@@ -142,8 +142,7 @@ export default function ProfilRWClient() {
             <div className="space-y-3">
               {[
                 { label: "Ketua RW", name: profilRW.ketua },
-                { label: "Sekretaris", name: profilRW.sekretaris },
-                { label: "Bendahara", name: profilRW.bendahara },
+
               ].map((item) => (
                 <div key={item.label} className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl">
                   <div className="w-9 h-9 bg-primary-900 rounded-full flex items-center justify-center text-white">
