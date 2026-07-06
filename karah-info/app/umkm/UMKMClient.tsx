@@ -19,7 +19,7 @@ export default function UMKMClient({ initialData }: { initialData: UMKM[] }) {
         !search ||
         u.nama_umkm.toLowerCase().includes(search.toLowerCase()) ||
         u.pemilik.toLowerCase().includes(search.toLowerCase());
-      const matchRT = filterRT === "Semua" || u.rt === filterRT;
+      const matchRT = filterRT === "Semua" || `RT ${u.rt}` === filterRT;
       return matchSearch && matchRT;
     });
   }, [initialData, search, filterRT]);
