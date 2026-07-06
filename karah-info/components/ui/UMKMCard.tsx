@@ -111,7 +111,7 @@ export default function UMKMCard({ umkm }: { umkm: UMKM }) {
             target="_blank"
             rel="noopener noreferrer"
             className="flex-1 flex items-center justify-center gap-1.5 bg-green-500 hover:bg-green-600 text-white text-sm font-medium py-2.5 rounded-xl transition-colors"
-          >
+          
             <MessageCircle size={15} />
             WhatsApp
           </a>
@@ -120,7 +120,7 @@ export default function UMKMCard({ umkm }: { umkm: UMKM }) {
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-center gap-1.5 border border-gray-200 hover:bg-gray-50 text-gray-600 text-sm font-medium px-3 py-2.5 rounded-xl transition-colors"
-          >
+          
             <Navigation size={15} />
             Lokasi
           </a>
