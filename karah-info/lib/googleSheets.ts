@@ -16,7 +16,7 @@ export async function getUMKMData(): Promise<UMKM[]> {
   const apiKey = process.env.GOOGLE_API_KEY;
 
   if (!sheetId || !apiKey) {
-  const dummyData = await import("@/data/umkm-dummy.json");
+    const dummyData = await import("@/data/umkm-dummy.json");
     return (dummyData.default as any[]).map((item) => ({
       ...item,
       foto: item.foto ? item.foto.split(",").map((f: string) => f.trim()) : [],
@@ -33,7 +33,7 @@ export async function getUMKMData(): Promise<UMKM[]> {
     });
 
     if (!response.ok) {
-    throw new Error(`Google Sheets API error: ${response.status}`);
+      throw new Error(`Google Sheets API error: ${response.status}`);
     }
 
     const data = await response.json();
@@ -62,4 +62,4 @@ export async function getUMKMData(): Promise<UMKM[]> {
       foto: item.foto ? item.foto.split(",").map((f: string) => f.trim()) : [],
     }));
   }
-  
+}
