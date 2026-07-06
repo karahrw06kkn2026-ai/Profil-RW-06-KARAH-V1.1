@@ -125,7 +125,4 @@ export default function UMKMCard({ umkm }: { umkm: UMKM }) {
             Lokasi
           </a>
         </div>
-      </div>
-    </div>
-  );
-}
+        
