@@ -53,7 +53,7 @@ export async function getUMKMData(): Promise<UMKM[]> {
         foto: row[9] ? row[9].split(",").map((f: string) => f.trim()) : [],
         kategori: row[10] || "Umum",
       }));
-
+  
   } catch (error) {
     console.error("Failed to fetch from Google Sheets, using dummy data:", error);
     const dummyData = await import("@/data/umkm-dummy.json");
