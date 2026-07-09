@@ -5,25 +5,24 @@ import { Search } from "lucide-react";
 import { UMKM } from "@/lib/googleSheets";
 import UMKMCard from "@/components/ui/UMKMCard";
 
-const KATEGORI_LIST = [
-  "Semua",
-  "Makanan",
-  "Minuman",
-  "Jasa",
-  "Fashion",
-  "Kelontong",
-  "Kerajinan",
-  "Umum",
-];
-
 export default function UMKMClient({ initialData }: { initialData: UMKM[] }) {
   const [search, setSearch] = useState("");
-  const [kategoriAktif, setKategoriAktif] = useState("Semua");
+  const [rtAktif, setRtAktif] = useState("Semua");
+
+  // Daftar RT diambil otomatis dari data, diurutkan berdasarkan nomor RT
+  const RT_LIST = useMemo(() => {
+    const rtSet = new Set(initialData.map((umkm) => umkm.rt).filter(Boolean));
+    const sorted = Array.from(rtSet).sort((a, b) => {
+      const numA = parseInt(a.replace(/\D/g, ""), 10) || 0;
+      const numB = parseInt(b.replace(/\D/g, ""), 10) || 0;
+      return numA - numB;
+    });
+    return ["Semua", ...sorted];
+  }, [initialData]);
 
   const filteredData = useMemo(() => {
     return initialData.filter((umkm) => {
-      const cocokKategori =
-        kategoriAktif === "Semua" || umkm.kategori === kategoriAktif;
+      const cocokRt = rtAktif === "Semua" || umkm.rt === rtAktif;
 
       const keyword = search.trim().toLowerCase();
       const cocokSearch =
@@ -32,9 +31,9 @@ export default function UMKMClient({ initialData }: { initialData: UMKM[] }) {
         umkm.pemilik.toLowerCase().includes(keyword) ||
         umkm.alamat.toLowerCase().includes(keyword);
 
-      return cocokKategori && cocokSearch;
+      return cocokRt && cocokSearch;
     });
-  }, [initialData, search, kategoriAktif]);
+  }, [initialData, search, rtAktif]);
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
@@ -61,19 +60,19 @@ export default function UMKMClient({ initialData }: { initialData: UMKM[] }) {
         />
       </div>
 
-      {/* Filter kategori */}
+      {/* Filter RT */}
       <div className="flex gap-2 overflow-x-auto pb-2 mb-6 -mx-1 px-1">
-        {KATEGORI_LIST.map((kategori) => (
+        {RT_LIST.map((rt) => (
           <button
-            key={kategori}
-            onClick={() => setKategoriAktif(kategori)}
+            key={rt}
+            onClick={() => setRtAktif(rt)}
             className={`whitespace-nowrap px-4 py-1.5 rounded-full text-sm font-medium border transition-colors ${
-              kategoriAktif === kategori
+              rtAktif === rt
                 ? "bg-primary-900 text-white border-primary-900"
                 : "bg-white text-gray-600 border-gray-200 hover:bg-gray-50"
             }`}
           >
-            {kategori}
+            {rt}
           </button>
         ))}
       </div>
