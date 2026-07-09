@@ -116,6 +116,7 @@ export default function UMKMCard({ umkm }: { umkm: UMKM }) {
 
         <div className="flex gap-2 mt-auto">
           
+            <a
             href={`https://wa.me/${umkm.whatsapp}`}
             target="_blank"
             rel="noopener noreferrer"
@@ -125,6 +126,7 @@ export default function UMKMCard({ umkm }: { umkm: UMKM }) {
             WhatsApp
           </a>
           
+            <a
             href={umkm.maps}
             target="_blank"
             rel="noopener noreferrer"
