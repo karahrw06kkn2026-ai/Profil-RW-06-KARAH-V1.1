@@ -25,8 +25,8 @@ export default function Footer() {
               <Phone size={18} className="text-green-300" />
               <span className="font-semibold text-sm">Kontak RW</span>
             </div>
-            <p className="text-green-100 text-sm">(031) 1234 5678</p>
-            <p className="text-green-100 text-sm">rw6karah@gmail.com</p>
+            <p className="text-green-100 text-sm"> 081358477599 </p>
+            <p className="text-green-100 text-sm">karahrw06.kkn2026@gmail.com</p>
           </div>
 
           {/* Jam Pelayanan */}
