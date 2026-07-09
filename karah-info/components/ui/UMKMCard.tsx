@@ -1,30 +1,42 @@
 "use client";
 
 import Image from "next/image";
-import { MapPin, MessageCircle, User, Navigation, ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  MapPin,
+  MessageCircle,
+  User,
+  Navigation,
+  ChevronLeft,
+  ChevronRight,
+  Utensils,
+  Coffee,
+  Wrench,
+  Shirt,
+  ShoppingBasket,
+  Palette,
+  Store,
+} from "lucide-react";
 import { useState } from "react";
 import { UMKM } from "@/lib/googleSheets";
 
-function getImageUrl(url: string, kategori?: string): string {
-  const defaultImages: Record<string, string> = {
-    Makanan: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&h=300&fit=crop",
-    Minuman: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400&h=300&fit=crop",
-    Jasa: "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=400&h=300&fit=crop",
-    Fashion: "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400&h=300&fit=crop",
-    Kelontong: "https://images.unsplash.com/photo-1604719312566-8912e9c8a213?w=400&h=300&fit=crop",
-    Kerajinan: "https://images.unsplash.com/photo-1452860606245-08befc0ff44b?w=400&h=300&fit=crop",
-    Umum: "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=400&h=300&fit=crop",
-  };
-
-  if (url && url.startsWith("/")) return url;
-
+// Ubah link Google Drive jadi link thumbnail langsung; kalau bukan drive link, dipakai apa adanya.
+function resolveFotoUrl(url: string): string {
   if (url && url.includes("drive.google.com")) {
     const driveMatch = url.match(/[-\w]{25,}/);
     if (driveMatch) return `https://drive.google.com/thumbnail?id=${driveMatch[0]}&sz=w400`;
   }
-
-  return defaultImages[kategori || "Umum"] || defaultImages["Umum"];
+  return url;
 }
+
+const kategoriIcon: Record<string, typeof Store> = {
+  Makanan: Utensils,
+  Minuman: Coffee,
+  Jasa: Wrench,
+  Fashion: Shirt,
+  Kelontong: ShoppingBasket,
+  Kerajinan: Palette,
+  Umum: Store,
+};
 
 const kategoriColor: Record<string, string> = {
   Makanan: "bg-orange-100 text-orange-700",
@@ -37,12 +49,16 @@ const kategoriColor: Record<string, string> = {
 };
 
 export default function UMKMCard({ umkm }: { umkm: UMKM }) {
-  const badgeClass = kategoriColor[umkm.kategori || "Umum"] || kategoriColor["Umum"];
+  const kategori = umkm.kategori || "Umum";
+  const badgeClass = kategoriColor[kategori] || kategoriColor["Umum"];
+  const KategoriIcon = kategoriIcon[kategori] || Store;
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const fotoList = Array.isArray(umkm.foto) && umkm.foto.length > 0
-    ? umkm.foto
-    : [""];
+  // Cuma foto yang benar-benar keisi yang dianggap valid
+  const fotoList = (Array.isArray(umkm.foto) ? umkm.foto : []).filter(
+    (f) => f && f.trim() !== ""
+  );
+  const punyaFoto = fotoList.length > 0;
 
   const prev = () => setCurrentIndex((i) => (i - 1 + fotoList.length) % fotoList.length);
   const next = () => setCurrentIndex((i) => (i + 1) % fotoList.length);
@@ -50,14 +66,20 @@ export default function UMKMCard({ umkm }: { umkm: UMKM }) {
   return (
     <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow duration-200 flex flex-col">
       <div className="relative h-48 bg-gray-100">
-        <Image
-          src={getImageUrl(fotoList[currentIndex], umkm.kategori)}
-          alt={umkm.nama_umkm}
-          fill
-          className="object-cover"
-          unoptimized
-        />
-        {fotoList.length > 1 && (
+        {punyaFoto ? (
+          <Image
+            src={resolveFotoUrl(fotoList[currentIndex])}
+            alt={umkm.nama_umkm}
+            fill
+            className="object-cover"
+            unoptimized
+          />
+        ) : (
+          <div className={`w-full h-full flex items-center justify-center ${badgeClass}`}>
+            <KategoriIcon size={56} strokeWidth={1.5} />
+          </div>
+        )}
+        {punyaFoto && fotoList.length > 1 && (
           <>
             <button
               onClick={prev}
