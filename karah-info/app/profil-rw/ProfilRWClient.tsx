@@ -20,18 +20,15 @@ export default function ProfilRWClient() {
   const kategoriData = [
     { name: "Lansia", value: profilRW.lansia, color: "#8B5CF6" },
     { name: "Balita", value: profilRW.balita, color: "#F59E0B" },
-    { name: "Pendatang", value: profilRW.pendatang, color: "#3B82F6" },
-    { name: "Warga Tetap", value: profilRW.jumlahPenduduk - profilRW.pendatang, color: "#1B4332" },
   ];
 
   const statsCards = [
-    { icon: Home, label: "Jumlah Rumah", value: profilRW.jumlahRumah, color: "bg-primary-900", unit: "Rumah" },
+    { icon: Home, label: "Jumlah KK", value: profilRW.jumlahKK, color: "bg-primary-900", unit: "Rumah" },
     { icon: Users, label: "Jumlah Penduduk", value: profilRW.jumlahPenduduk, color: "bg-blue-500", unit: "Jiwa" },
     { icon: UserCheck, label: "Laki-laki", value: profilRW.lakiLaki, color: "bg-indigo-500", unit: "Jiwa" },
     { icon: UserCheck, label: "Perempuan", value: profilRW.perempuan, color: "bg-pink-500", unit: "Jiwa" },
     { icon: TrendingUp, label: "Lansia (60+)", value: profilRW.lansia, color: "bg-purple-500", unit: "Jiwa" },
     { icon: Baby, label: "Balita (0–5)", value: profilRW.balita, color: "bg-yellow-500", unit: "Jiwa" },
-    { icon: Briefcase, label: "Pendatang/Kost", value: profilRW.pendatang, color: "bg-orange-500", unit: "Jiwa" },
   ];
 
   return (
