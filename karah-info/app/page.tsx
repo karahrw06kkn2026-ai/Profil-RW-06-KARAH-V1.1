@@ -5,11 +5,24 @@ import {
   Building2, ChevronRight
 } from "lucide-react";
 import profilRW from "@/data/profil-rw.json";
-import umkmDummy from "@/data/umkm-dummy.json";
+import { getUMKMData } from "@/lib/googleSheets";
 import MapPreview from "@/components/sections/MapPreview";
 
-export default function HomePage() {
-  const featuredUMKM = umkmDummy.slice(0, 6);
+// Ubah link Google Drive jadi link thumbnail langsung
+function resolveFotoUrl(url: string): string {
+  if (url && url.includes("drive.google.com")) {
+    const driveMatch = url.match(/[-\w]{25,}/);
+    if (driveMatch) return `https://drive.google.com/thumbnail?id=${driveMatch[0]}&sz=w400`;
+  }
+  return url;
+}
+
+export default async function HomePage() {
+  const allUMKM = await getUMKMData();
+  const umkmPunyaFoto = allUMKM.filter(
+    (u) => Array.isArray(u.foto) && u.foto.some((f) => f && f.trim() !== "")
+  );
+  const featuredUMKM = umkmPunyaFoto.slice(0, 6);
 
   const kategoriColor: Record<string, string> = {
     Makanan: "bg-orange-100 text-orange-700",
@@ -244,7 +257,7 @@ export default function HomePage() {
               >
                 <div className="relative h-32 bg-gray-100">
                   <Image
-                    src={umkm.foto}
+                    src={resolveFotoUrl(umkm.foto[0])}
                     alt={umkm.nama_umkm}
                     fill
                     className="object-cover"
