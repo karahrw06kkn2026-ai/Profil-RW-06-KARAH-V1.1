@@ -41,7 +41,7 @@ export default async function HomePage() {
         {/* Background Image */}
         <div className="absolute inset-0">
           <Image
-            src="/images/hero-kkn.jpg"
+            src="/images/hero-kkn.jpeg"
             alt="Kegiatan KKN RW 6 Karah"
             fill
             className="object-cover object-[center_25%] saturate-[0.85]"
