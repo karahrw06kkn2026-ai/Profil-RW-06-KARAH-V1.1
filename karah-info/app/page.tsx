@@ -41,15 +41,14 @@ export default async function HomePage() {
         {/* Background Image */}
         <div className="absolute inset-0">
           <Image
-            src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1400&h=600&fit=crop"
-            alt="Wilayah RW 6 Karah"
+            src="/images/hero-kkn.jpg"
+            alt="Kegiatan KKN RW 6 Karah"
             fill
-            className="object-cover"
-            unoptimized
+            className="object-cover object-[center_25%] saturate-[0.85]"
             priority
           />
           {/* Green overlay - left side stronger, right fades */}
-          <div className="absolute inset-0 bg-gradient-to-r from-primary-900/95 via-primary-900/80 to-primary-900/20" />
+          <div className="absolute inset-0 bg-gradient-to-r from-primary-900/95 via-primary-900/85 to-primary-900/40" />
         </div>
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full">
