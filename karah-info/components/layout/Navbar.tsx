@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X, Phone, Home, Users, MapPin, ShoppingBag, Map } from "lucide-react";
 
@@ -23,8 +24,13 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 shrink-0">
-            <div className="w-10 h-10 rounded-full bg-primary-900 flex items-center justify-center text-white font-bold text-xs leading-tight text-center">
-              <span>KKN<br/>RW6</span>
+            <div className="relative w-10 h-10 rounded-full overflow-hidden shrink-0 bg-white p-1">
+              <Image
+                src="/images/logo-kkn.jpeg"
+                alt="Logo KKN RW 6 Karah"
+                fill
+                className="object-contain"
+              />
             </div>
             <div>
               <div className="font-bold text-primary-900 text-sm leading-tight">RW 6 KARAH</div>
@@ -56,12 +62,12 @@ export default function Navbar() {
 
           {/* CTA Button */}
           <div className="hidden md:flex items-center">
-            <a
+            
               href="https://wa.me/6281234567890"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 bg-primary-900 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-primary-800 transition-colors"
-            >
+            
               <Phone size={14} />
               Hubungi RW
             </a>
@@ -99,7 +105,7 @@ export default function Navbar() {
                 </Link>
               );
             })}
-            <a
+            
               href="https://wa.me/6281234567890"
               target="_blank"
               rel="noopener noreferrer"
