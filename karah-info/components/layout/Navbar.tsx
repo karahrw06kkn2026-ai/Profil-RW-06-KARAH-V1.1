@@ -62,12 +62,12 @@ export default function Navbar() {
 
           {/* CTA Button */}
           <div className="hidden md:flex items-center">
-            
+            <a
               href="https://wa.me/6281234567890"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 bg-primary-900 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-primary-800 transition-colors"
-            
+            >
               <Phone size={14} />
               Hubungi RW
             </a>
@@ -105,7 +105,7 @@ export default function Navbar() {
                 </Link>
               );
             })}
-            
+            <a
               href="https://wa.me/6281234567890"
               target="_blank"
               rel="noopener noreferrer"
