@@ -8,7 +8,7 @@ const RT_OPTIONS = ["Semua", "RT 1", "RT 2", "RT 3", "RT 4", "RT 5", "RT 6", "RT
 
 // Path gambar peta statis per RT
 const PETA_IMAGES: Record<string, string> = {
-  "Semua": "/images/peta/peta-semua.png"
+  "Semua": "/images/peta/peta-semua.png",
   "RT 1": "/images/peta/peta-rt-1.png",
   "RT 2": "/images/peta/peta-rt-2.png",
   "RT 3": "/images/peta/peta-rt-3.png",
