@@ -6,7 +6,7 @@ import { UMKM } from "@/lib/googleSheets";
 
 const RT_OPTIONS = ["Semua", "RT 1", "RT 2", "RT 3", "RT 4", "RT 5", "RT 6", "RT 7"];
 
-// Path gambar peta statis per RT
+
 const PETA_IMAGES: Record<string, string> = {
   "Semua": "/images/peta/peta-semua.png",
   "RT 1": "/images/peta/peta-rt-1.png",
@@ -19,7 +19,7 @@ const PETA_IMAGES: Record<string, string> = {
 };
 
 export default function PetaClient({ umkmData }: { umkmData: UMKM[] }) {
-const [filterRT, setFilterRT] = useState("Semua");
+  const [filterRT, setFilterRT] = useState("Semua");
 
   const filteredUMKM =
     filterRT === "Semua" ? umkmData : umkmData.filter((u) => u.rt === filterRT);
@@ -76,18 +76,18 @@ const [filterRT, setFilterRT] = useState("Semua");
                 <p className="text-sm text-gray-500">{umkm.alamat}</p>
                 <p className="text-xs text-gray-400 mt-1">{umkm.rt}</p>
                 <div className="mt-2 flex gap-2">
-                  
+                  <a
                     href={`https://wa.me/${umkm.whatsapp}`}
                     target="_blank"
                     className="bg-[#25D366] text-white px-3 py-1 rounded-md text-xs"
-                  
+                  >
                     WhatsApp
                   </a>
-                  
+                  <a
                     href={umkm.maps}
                     target="_blank"
                     className="bg-primary-900 text-white px-3 py-1 rounded-md text-xs"
-                  
+                  >
                     Maps
                   </a>
                 </div>
